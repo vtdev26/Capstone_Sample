@@ -12,4 +12,6 @@ Techique used:
 - Spring Boot: 2.6.11
 - Java: 8
 - Databind: 2.13.3
-- Exception Hanlder: (Updating...)
+- Exception Hanlder Custom
+- ModelMapper: 3.1.0
+- Commons lang3: 3.12.0

@@ -4,18 +4,19 @@ import capstone.project.Demo_Project.domain.entities.Account;
 import capstone.project.Demo_Project.domain.request.AccountRequestDto;
 import capstone.project.Demo_Project.domain.response.AccountResponseDto;
 import capstone.project.Demo_Project.domain.response.PaginationResponse;
+import capstone.project.Demo_Project.errorhandling.DemoException;
+import capstone.project.Demo_Project.errorhandling.ErrorTypes;
 import capstone.project.Demo_Project.repositories.AccountRepository;
 import capstone.project.Demo_Project.services.AccountService;
 import capstone.project.Demo_Project.utilities.BeanUtility;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
-import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -30,7 +31,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountRepository.findByUserName(userName);
         if (ObjectUtils.isEmpty(account)) {
             logger.error("Can not found account with account name: {}", userName);
-            return new AccountResponseDto();
+            throw new DemoException(ErrorTypes.ACCOUNT_NOT_FOUND, userName);
         }
         return BeanUtility.converValue(account, AccountResponseDto.class);
     }
@@ -39,7 +40,8 @@ public class AccountServiceImpl implements AccountService {
     public AccountResponseDto findAccountByAccountId(Long accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
         if (!account.isPresent()) {
-            return new AccountResponseDto();
+            logger.error("Can not found account with account name: {}", accountId);
+            throw new DemoException(ErrorTypes.ACCOUNT_NOT_FOUND, accountId.intValue());
         }
         return BeanUtility.converValue(account.get(), AccountResponseDto.class);
     }
@@ -48,27 +50,16 @@ public class AccountServiceImpl implements AccountService {
     public AccountResponseDto create(AccountRequestDto request) {
         logger.info("Starting create account!");
         if (ObjectUtils.isEmpty(request)) {
-            return null;
+            logger.error("Request must not be empty!");
+            throw new DemoException(ErrorTypes.INVALID_REQUEST);
+
         }
         Account accountDuplicate = accountRepository.findByUserName(request.getUserName());
-        if (!ObjectUtils.isEmpty(accountDuplicate)) {
+        if (ObjectUtils.isNotEmpty(accountDuplicate)) {
             logger.error("Account with account name: {} existing!", request.getUserName());
-            return null;
+            throw new DemoException(ErrorTypes.ACCOUNT_WITH_NAME_ALREADY_EXISTS, request.getUserName());
         }
-        Account account = new Account();
-        account.setFullName(request.getFullName());
-        account.setAddress(request.getAddress());
-        account.setEmail(request.getEmail());
-        account.setGender(request.getGender());
-        account.setDateOfBirth(new Date());
-        account.setImage(request.getImage());
-        account.setPassword(request.getPassword());
-        account.setIdentityCard(request.getIdentityCard());
-        account.setPhoneNumber(request.getPhoneNumber());
-        account.setRegisterDate(new Date());
-        account.setStatus(request.getStatus());
-        account.setUserName(request.getUserName());
-
+        Account account = BeanUtility.converValue(request, Account.class);
         Account newAccount = accountRepository.save(account);
         logger.info("Account created success!");
         return BeanUtility.converValue(newAccount, AccountResponseDto.class);
@@ -86,8 +77,7 @@ public class AccountServiceImpl implements AccountService {
             logger.error("Can not found account with id {}", id);
             return null;
         }
-        Account account = existingAccount.get();
-        account = BeanUtility.converValue(request, Account.class);
+        Account account = BeanUtility.converValue(request, Account.class);
         account.setId(id);
         accountRepository.save(account);
         logger.info("Update account successfully!");

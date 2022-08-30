@@ -1,4 +1,4 @@
-package capstone.project.Demo_Project.sercurity.jwt;
+package capstone.project.Demo_Project.security.jwt;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

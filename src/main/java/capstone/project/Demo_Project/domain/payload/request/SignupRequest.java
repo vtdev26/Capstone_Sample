@@ -1,5 +1,6 @@
 package capstone.project.Demo_Project.domain.payload.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,14 +12,18 @@ import java.util.Set;
 @Setter
 public class SignupRequest {
     @NotBlank
+    @JsonProperty("username")
     private String username;
 
     @NotBlank
     @Email
+    @JsonProperty("email")
     private String email;
 
-    private Set<String> role;
+    @JsonProperty("roles")
+    private Set<String> roles;
 
     @NotBlank
+    @JsonProperty("password")
     private String password;
 }

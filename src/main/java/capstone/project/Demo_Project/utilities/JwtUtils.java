@@ -2,7 +2,7 @@ package capstone.project.Demo_Project.utilities;
 
 import java.util.Date;
 
-import capstone.project.Demo_Project.sercurity.services.UserDetailsImpl;
+import capstone.project.Demo_Project.security.services.UserDetailsImpl;
 import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
+import org.springframework.http.ResponseCookie;
 
 @Component
 public class JwtUtils {
@@ -20,6 +21,9 @@ public class JwtUtils {
 
     @Value("${app.jwtExpirationMs}")
     private int jwtExpirationMs;
+
+    @Value("${app.jwtCookieName}")
+    private String jwtCookie;
 
     public String generateJwtToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -49,5 +53,10 @@ public class JwtUtils {
             logger.error("JWT claims string is empty: {}", e.getMessage());
         }
         return false;
+    }
+
+    public ResponseCookie getCleanJwtCookie() {
+        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/auth").build();
+        return cookie;
     }
 }

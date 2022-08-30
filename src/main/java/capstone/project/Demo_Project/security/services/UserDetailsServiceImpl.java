@@ -1,4 +1,4 @@
-package capstone.project.Demo_Project.sercurity.services;
+package capstone.project.Demo_Project.security.services;
 
 import capstone.project.Demo_Project.domain.entities.User;
 import capstone.project.Demo_Project.repositories.UserRepository;

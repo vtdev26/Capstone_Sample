@@ -102,10 +102,10 @@ public class UserServiceImpl implements UserService {
         Page<User> page = null;
         switch (filter) {
             case "status":
-                page = userRepository.findAllByStatusEquals(Integer.parseInt(key), pageable);
+//                page = userRepository.findAllByStatusEquals(Integer.parseInt(key), pageable);
                 break;
             case "user_name":
-                page = userRepository.findAllByUserNameContains(key, pageable);
+//                page = userRepository.findAllByUserNameContains(key, pageable);
                 break;
             default:
                 page = userRepository.findAll(pageable);

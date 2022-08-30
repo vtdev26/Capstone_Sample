@@ -1,8 +1,8 @@
 package capstone.project.Demo_Project.config;
 
-import capstone.project.Demo_Project.sercurity.jwt.AuthEntryPointJwt;
-import capstone.project.Demo_Project.sercurity.jwt.AuthTokenFilter;
-import capstone.project.Demo_Project.sercurity.services.UserDetailsServiceImpl;
+import capstone.project.Demo_Project.security.jwt.AuthEntryPointJwt;
+import capstone.project.Demo_Project.security.jwt.AuthTokenFilter;
+import capstone.project.Demo_Project.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                .authorizeRequests().antMatchers("/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

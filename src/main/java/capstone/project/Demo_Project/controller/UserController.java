@@ -52,7 +52,7 @@ public class UserController {
 
     @GetMapping("")
     public PaginationResponse filter(@RequestParam("filterBy") String filter, @RequestParam("key") String key,
-                                     Pageable pageable){
+                                     Pageable pageable) {
         return userService.filter(filter, key, pageable);
     }
 }

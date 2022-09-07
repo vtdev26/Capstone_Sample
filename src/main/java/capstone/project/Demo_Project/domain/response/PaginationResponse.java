@@ -1,6 +1,6 @@
 package capstone.project.Demo_Project.domain.response;
 
-import capstone.project.Demo_Project.domain.entities.Account;
+import capstone.project.Demo_Project.domain.entities.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +20,5 @@ public class PaginationResponse {
     private int numberOfPage;
 
     @JsonProperty("items")
-    private List<Account> items;
+    private List<User> items;
 }

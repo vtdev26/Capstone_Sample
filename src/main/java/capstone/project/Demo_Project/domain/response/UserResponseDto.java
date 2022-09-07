@@ -1,27 +1,32 @@
-package capstone.project.Demo_Project.domain.request;
+package capstone.project.Demo_Project.domain.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import javax.persistence.Column;
+import java.util.Date;
+
 @Data
-public class AccountRequestDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class UserResponseDto {
+    @JsonProperty("user_id")
+    private String user_id;
+
     @JsonProperty("userName")
     private String userName;
 
     @JsonProperty("address")
     private String address;
 
+    @JsonProperty("dateOfBirth")
+    private Date dateOfBirth;
+
     @JsonProperty("email")
     private String email;
 
-    @JsonProperty("fullName")
-    private String fullName;
-
     @JsonProperty("gender")
     private String gender;
-
-    @JsonProperty("identityCard")
-    private String identityCard;
 
     @JsonProperty("image")
     private String image;
@@ -32,6 +37,9 @@ public class AccountRequestDto {
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
-    @JsonProperty("status")
-    private Integer status;
+    @JsonProperty("registerDate")
+    private Date registerDate;
+
+    @Column(name = "disable")
+    private boolean disable;
 }

@@ -13,7 +13,8 @@ public enum ErrorTypes implements ErrorType {
     INVALID_REQUEST("INVALID_REQUEST", "Invalid request", 400),
     USER_NOT_FOUND("USER_NOT_FOUND", "User not found.", 404),
     USER_WITH_NAME_ALREADY_EXISTS("USER_WITH_NAME_ALREADY_EXISTS",
-            "User with name already exists", 400);
+            "User with name already exists", 400),
+    PASSWORD_IS_INCORRECT("PASSWORD_IS_INCORRECT", "Password is incorrect", 400);
 
     private final static List<ErrorType> VALUES = Collections.unmodifiableList(Arrays.asList(ErrorTypes.values()));
     final String errorCode;

@@ -22,16 +22,19 @@ import java.util.Set;
 @Table(name = "users")
 @NoArgsConstructor
 public class User {
-    private static final String ID = "id";
-    private static final String DATE_OF_BIRTH = "date_of_birth";
-    private static final String EMAIL = "email";
-    private static final String USER_NAME = "user_name";
-    private static final String GENDER = "gender";
-    private static final String IMAGE = "image";
-    private static final String PASSWORD = "password";
-    private static final String PHONE_NUMBER = "phone_number";
-    private static final String REGISTER_DATE = "register_date";
-    private static final String DISABLE = "disable";
+    public static final String ID = "id";
+    public static final String DATE_OF_BIRTH = "date_of_birth";
+    public static final String EMAIL = "email";
+    public static final String USER_NAME = "user_name";
+    public static final String GENDER = "gender";
+    public static final String IMAGE = "image";
+    public static final String PASSWORD = "password";
+    public static final String PHONE_NUMBER = "phone_number";
+    public static final String CREATED_DATE = "created_date";
+    public static final String UPDATED_DATE = "updated_date";
+    public static final String DISABLE = "disable";
+    public static final String DISABLE_TRUE = "true";
+    public static final String DISABLE_FALSE = "false";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,24 +65,21 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "register_date", columnDefinition = "DATE")
-    private Date registerDate;
+    @Column(name = "region")
+    private String region;
 
-    @Column(name = "disable")
-    private boolean disable = false;
+    @Column(name = "disabled")
+    private boolean disabled = false;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "created_date", columnDefinition = "TIMESTAMP")
+    private Date createdDate;
+
+    @Column(name = "updated_date", columnDefinition = "TIMESTAMP")
+    private Date updatedDate;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_roles",
+    @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-    public User(String userName, String email, String password) {
-        this.username = userName;
-        this.email = email;
-        this.password = password;
-    }
 }

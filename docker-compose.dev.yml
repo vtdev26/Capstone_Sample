@@ -15,9 +15,10 @@ services:
       MYSQL_ROOT_NAME: root
       MYSQL_NAME: mysql
       MYSQL_ROOT_PASSWORD: 123
-#      MYSQL_DATABASE: g3_movietheater?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
+#      MYSQL_DATABASE: tss?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
   capstone-service:
-    image: vanthanh26/capstone-service:lastest
+#    image: vanthanh26/capstone-service:lastest
+    image: vanthanh26/aws-tss-service:v1.0.0
 #    restart: always
     container_name: capstone-service
     ports:

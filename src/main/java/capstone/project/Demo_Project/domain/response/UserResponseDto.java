@@ -13,8 +13,8 @@ public class UserResponseDto {
     @JsonProperty("user_id")
     private String user_id;
 
-    @JsonProperty("userName")
-    private String userName;
+    @JsonProperty("username")
+    private String username;
 
     @JsonProperty("address")
     private String address;
@@ -31,14 +31,11 @@ public class UserResponseDto {
     @JsonProperty("image")
     private String image;
 
-    @JsonProperty("password")
-    private String password;
-
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
-    @JsonProperty("registerDate")
-    private Date registerDate;
+    @JsonProperty("createdDate")
+    private Date createdDate;
 
     @Column(name = "disable")
     private boolean disable;

@@ -3,13 +3,12 @@ package capstone.project.Demo_Project.domain.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.util.Date;
 
 @Data
 public class UserRequestDto {
-    @JsonProperty("userName")
-    private String userName;
+    @JsonProperty("username")
+    private String username;
 
     @JsonProperty("address")
     private String address;
@@ -26,15 +25,10 @@ public class UserRequestDto {
     @JsonProperty("image")
     private String image;
 
-    @JsonProperty("password")
-    private String password;
-
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
-    @JsonProperty("registerDate")
-    private Date registerDate;
+    @JsonProperty("updatedDate")
+    private Date updatedDate;
 
-    @Column(name = "disable")
-    private boolean disable;
 }

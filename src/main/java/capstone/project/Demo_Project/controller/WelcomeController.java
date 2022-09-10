@@ -72,12 +72,42 @@ public class WelcomeController {
                 "    <div class=\"middle\">\n" +
                 "        <h1>COMING SOON</h1>\n" +
                 "        <hr>\n" +
-                "        <p>14 weeks left</p>\n" +
+                "        <p id=\"demo\" style=\"font-size:30px\"></p>\n" +
                 "    </div>\n" +
                 "    <div class=\"bottomleft\">\n" +
                 "        <p>Master Learn Service</p>\n" +
                 "    </div>\n" +
                 "</div>\n" +
+                "<script>\n" +
+                "// Set the date we're counting down to\n" +
+                "var countDownDate = new Date(\"Jan 1, 2023 15:37:25\").getTime();\n" +
+                "\n" +
+                "// Update the count down every 1 second\n" +
+                "var countdownfunction = setInterval(function() {\n" +
+                "\n" +
+                "  // Get todays date and time\n" +
+                "  var now = new Date().getTime();\n" +
+                "  \n" +
+                "  // Find the distance between now an the count down date\n" +
+                "  var distance = countDownDate - now;\n" +
+                "  \n" +
+                "  // Time calculations for days, hours, minutes and seconds\n" +
+                "  var days = Math.floor(distance / (1000 * 60 * 60 * 24));\n" +
+                "  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));\n" +
+                "  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));\n" +
+                "  var seconds = Math.floor((distance % (1000 * 60)) / 1000);\n" +
+                "  \n" +
+                "  // Output the result in an element with id=\"demo\"\n" +
+                "  document.getElementById(\"demo\").innerHTML = days + \"d \" + hours + \"h \"\n" +
+                "  + minutes + \"m \" + seconds + \"s \";\n" +
+                "  \n" +
+                "  // If the count down is over, write some text \n" +
+                "  if (distance < 0) {\n" +
+                "    clearInterval(countdownfunction);\n" +
+                "    document.getElementById(\"demo\").innerHTML = \"EXPIRED\";\n" +
+                "  }\n" +
+                "}, 1000);\n" +
+                "</script>" +
                 "\n" +
                 "</body>\n" +
                 "</html>";

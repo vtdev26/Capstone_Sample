@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserService {
             logger.error("Can not found user with id {}", id);
             throw new DemoException(ErrorTypes.USER_NOT_FOUND);
         }
+
         User user = BeanUtility.converValue(request, User.class);
         user.setUserId(id);
         user.setUpdatedDate(new Date());

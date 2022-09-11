@@ -12,6 +12,7 @@ import java.util.List;
 public enum ErrorTypes implements ErrorType {
     INVALID_REQUEST("INVALID_REQUEST", "Invalid request", 400),
     USER_NOT_FOUND("USER_NOT_FOUND", "User not found.", 404),
+    ROLE_NOT_FOUND("ROLE_NOT_FOUND", "Role not found.", 404),
     USER_WITH_NAME_ALREADY_EXISTS("USER_WITH_NAME_ALREADY_EXISTS",
             "User with name already exists", 400),
     PASSWORD_IS_INCORRECT("PASSWORD_IS_INCORRECT", "Password is incorrect", 400);

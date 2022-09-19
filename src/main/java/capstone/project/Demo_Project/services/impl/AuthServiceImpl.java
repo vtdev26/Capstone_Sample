@@ -7,6 +7,8 @@ import capstone.project.Demo_Project.domain.payload.request.LoginRequest;
 import capstone.project.Demo_Project.domain.payload.request.SignupRequest;
 import capstone.project.Demo_Project.domain.payload.response.JwtResponse;
 import capstone.project.Demo_Project.domain.payload.response.MessageResponse;
+import capstone.project.Demo_Project.errorhandling.DemoException;
+import capstone.project.Demo_Project.errorhandling.ErrorTypes;
 import capstone.project.Demo_Project.errorhandling.ValidationErrorCode;
 import capstone.project.Demo_Project.repositories.RoleRepository;
 import capstone.project.Demo_Project.repositories.UserRepository;
@@ -82,7 +84,6 @@ public class AuthServiceImpl implements AuthService {
         }
 
         // Create new user's account
-        // Create new user's account
         User user = new User();
         user.setUsername(signupRequest.getUsername());
         user.setEmail(signupRequest.getEmail());
@@ -94,20 +95,20 @@ public class AuthServiceImpl implements AuthService {
 
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException(ValidationErrorCode.ROLE_IS_NOT_FOUND));
+                    .orElseThrow(() -> new DemoException(ErrorTypes.ROLE_NOT_FOUND));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException(ValidationErrorCode.ROLE_IS_NOT_FOUND));
+                                .orElseThrow(() -> new DemoException(ErrorTypes.ROLE_NOT_FOUND));
                         roles.add(adminRole);
                         break;
 
                     default:
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException(ValidationErrorCode.ROLE_IS_NOT_FOUND));
+                                .orElseThrow(() -> new DemoException(ErrorTypes.ROLE_NOT_FOUND));
                         roles.add(userRole);
                 }
             });
